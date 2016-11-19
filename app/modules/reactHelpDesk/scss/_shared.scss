@@ -1,0 +1,32 @@
+button[disabled],
+html input[disabled] {
+  cursor: not-allowed;
+}
+
+.content-wrapper {
+  overflow: hidden;
+  transition: all cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s;
+  &.live-chat-open {
+    transform: translate(-$chat-width, 0);
+  }
+}
+
+.live-chat-wrapper, .live-chat-manager {
+  input,
+  textarea {
+    &:focus {
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 25px rgba(0,0,0,0.4) inset;
+    }
+  }
+  &.dark {
+    input,
+    textarea {
+      background-color: #ededed;
+      &:focus {
+        box-shadow: 0 0 25px rgba(0,0,0,0.4) inset;
+        color: #999;
+      }
+    }
+  }
+}

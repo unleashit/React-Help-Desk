@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-inverse">
+    <a class="navbar-brand" href="/">React Help Desk</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item <%= (activeClass === 'home') ? 'active' : '' %>"><a href="/" class="nav-link">Home</a></li>
+        <li class="nav-item <%= (activeClass === 'manage-live-chat') ? 'active' : '' %>"><a href="/admin/live-chat-manager" class="nav-link">Manage Help Desk</a></li>
+    </ul>
+    <ul class="nav navbar-nav float-sm-right">
+        <% if (!auth) { %>
+        <li class="nav-item"><a href="/login" class="nav-link">Log In</a></li>
+        <% } else { %>
+        <li class="nav-item"><a href="/logout" class="nav-link">Log Out</a></li>
+        <% } %>
+    </ul>
+</nav>

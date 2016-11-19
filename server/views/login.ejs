@@ -1,0 +1,24 @@
+<%- include('header', {title: title, auth: auth}) -%>
+
+<div class="container">
+    <div class="main-content row">
+        <div class="col-md-4 offset-sm-4">
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Log In" class="button button-green button-block">
+                </div>
+            </form>
+            <div class="login-error"><%= message %></div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') -%>

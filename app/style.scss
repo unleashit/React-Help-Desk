@@ -1,0 +1,68 @@
+@import "~bootstrap/scss/bootstrap";
+
+// a few global styles to make the overall template work
+// not needed for the help desk component
+
+html {
+  height: 100%;
+  font-size: 17px;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  font-family: "Sanchez", sans-serif;
+}
+
+// this allows clicking on the viewport to the left
+// of the chat box to close the chat
+#root,
+.page-wrapper,
+.content-wrapper {
+  height: 100%;
+}
+
+// global utility styles
+
+//.clearfix:after {
+//  content: " ";
+//  display: table;
+//  clear: both;
+//}
+//
+//.visually-hidden {
+//  border: 0;
+//  clip: rect(0 0 0 0);
+//  height: 1px;
+//  margin: -1px;
+//  overflow: hidden;
+//  padding: 0;
+//  position: absolute;
+//  width: 1px;
+//  &-focusable:active,
+//  &-focusable:focus {
+//    clip: auto;
+//    height: auto;
+//    margin: 0;
+//    overflow: visible;
+//    position: static;
+//    width: auto;
+//  }
+//}
+
+
+
+//.center-container {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//}
+
+@import "modules/home/scss/home";
+@import "modules/reactHelpDesk/scss/live-chat";
+

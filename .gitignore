@@ -1,0 +1,7 @@
+.idea
+node_modules
+tmp
+dist
+APPconfig.js
+DBconfig.json
+npm-debug.log*

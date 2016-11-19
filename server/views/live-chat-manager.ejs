@@ -1,0 +1,26 @@
+<%- include('header', {title: title, auth: auth}) -%>
+
+<div class="live-chat-manager row">
+    <div class="col-md-4">
+        <h3>Current Chats</h3>
+        <div id="userList" class="list-group"></div>
+        <h3 class="archived-chats">Archived Chats</h3>
+        <div id="archivedUserList" class="list-group"></div>
+    </div>
+    <div class="col-md-8">
+        <h3>Messages</h3>
+        <div class="form-group">
+            <div id="messages" class="messages"></div>
+        </div>
+        <div id="postBox">
+            <h3 class="send">Send</h3>
+
+            <div class="input-group">
+                <input type="text" id="message" class="post-input form-control" placeholder="Message...">
+                <span id="postMessage" class="post-message input-group-addon">Send</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') -%>

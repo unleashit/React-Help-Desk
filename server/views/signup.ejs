@@ -1,0 +1,25 @@
+<%- include('header', {title: title, auth: auth}) -%>
+
+<form method="POST" action="/signup" class="form-signin">
+    <h2 class="form-signin-heading">Create an account</h2>
+    <% if (typeof error !== 'undefined' && error.length) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <fieldset>
+        <div class="form-group">
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input id="inputUsername" type="text" name="email" placeholder="Email" autofocus="" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input id="inputPassword" type="password" name="password" placeholder="Password" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Repeat Password</label>
+            <input id="inputPassword2" type="password" name="password2" placeholder="Repeat Password" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign up</button>
+    </fieldset>
+</form>
+
+<%- include('footer') -%>

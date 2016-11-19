@@ -1,0 +1,256 @@
+@import 'variables';
+@import 'shared';
+
+.chat-launcher {
+  position: fixed;
+  z-index: 1;
+  right: 65px;
+  bottom: 65px;
+  height: 70px;
+  width: 70px;
+  padding-top: 22px;
+  border-radius: 50%;
+  background: #333;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 5px rgba(0,0,0,0.3);
+  color: #ddd;
+  text-align: center;
+  font-family: Oswald, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 500ms;
+  &.is-hidden {
+    opacity: 0;
+  }
+}
+
+.chat-indicator {
+  position: absolute;
+  top: 8px;
+  left: 27px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 1;
+  &.chat-online {
+    background-color: $light-green;
+    animation: blink-animation 2.5s infinite;
+  }
+  &.chat-offline {
+    background-color: $chat-offline;
+  }
+}
+
+@keyframes blink-animation {
+  10% {
+    opacity: 0.4;
+  }
+  13% {
+    opacity: 1;
+  }
+}
+
+.live-chat-wrapper {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $chat-width;
+  padding: 60px 30px 30px 30px;
+  background: #292929;
+  color: #ddd;
+  border-radius: 2px;
+  transform: translate($chat-width, 0);
+  transition: $panel-transition;
+  &.live-chat-open {
+    transform: translate(0, 0);
+  }
+  .inner-wrap {
+    position: relative;
+    height: auto;
+    min-height: 100%;
+  }
+  h3 {
+    margin-bottom: 1.4rem;
+    font-family: Oswald,sans-serif;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 12px;
+  }
+  textarea {
+    height: 140px;
+  }
+  .close-button {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    cursor: pointer;
+  }
+  .cloud {
+    height: auto;
+    width: 17px;
+  }
+  .cloud-container {
+    position: relative;
+    top: 2px;
+    padding-right: 6px;
+  }
+  .chat-online {
+    font-size: 0.9rem;
+    padding-top: 9px;
+    .cloud {
+      animation: blink-animation 2.5s infinite;
+      fill: $chat-online;
+    }
+  }
+  .chat-offline {
+    font-size: 0.9rem;
+    padding-top: 9px;
+    .cloud {
+      fill: $chat-offline;
+    }
+  }
+  .registration-name {
+    margin-top: 30px;
+  }
+  .chat-status {
+    padding: 7px 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .message-area {
+    overflow: auto;
+    border-radius: 2px;
+    background: #414141;
+    position: absolute;
+    top: 102px;
+    left: 0;
+    right: 0;
+    bottom: 101px;
+  }
+  .message-list {
+    margin: 0;
+    padding: 0;
+  }
+  .connected,
+  .not-connected {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: forestgreen;
+  }
+  .not-connected {
+    background: $chat-offline;
+  }
+  .posting {
+    border-bottom: 1px solid #555;
+    padding: 15px 0;
+    margin: 0 15px;
+    &:last-child {
+      border: 0;
+    }
+    .date {
+      float: right;
+      font-size: 0.7rem;
+      color: #999;
+    }
+    .message {
+      color: #777;
+      line-height: 1.4rem;
+    }
+  }
+  .is-typing {
+    padding: 5px 15px 20px 15px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+  .live-chat-send-group {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 26px;
+  color: #fff;
+  background-color: #828282;
+  border: 0;
+  font-family: Oswald, sans-serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  outline: none !important;
+  &.button-green {
+    background-color: $light-green;
+  }
+  &.button-charcoal {
+    background-color: #333;
+  }
+  &.button-smaller {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+  &.button-xs {
+    padding: 6px 8px;
+    font-size: 0.7rem;
+    border-radius: 20px;
+    border: 2px solid #b2b2b2;
+    color: #b2b2b2;
+    background: 0;
+  }
+  &.button-block {
+    display: block;
+    width: 100%;
+  }
+  &:link,
+  &:visited,
+  &:active,
+  &:target {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .content-wrapper {
+    &.live-chat-open {
+      transform: none;
+    }
+  }
+
+  .chat-launcher {
+    right: 25px;
+    bottom: 25px;
+  }
+
+  .live-chat-wrapper {
+    position: fixed;
+    overflow: auto;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: #292929;
+    color: #ddd;
+    padding: 60px 30px 30px 30px;
+    transform: translate(100%, 0);
+    transition: all cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s;
+    &.live-chat-open {
+      transform: translate(0, 0);
+    }
+  }
+}

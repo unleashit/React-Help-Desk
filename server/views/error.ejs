@@ -1,0 +1,17 @@
+<%- include('header', {title: title, auth: auth}) -%>
+
+<% if (status === 404) { %>
+
+<h1><%= status %></h1>
+
+<p>Sorry, you've done a booboo.</p>
+<p><%= url %> cannot be found. Try the <a href="/">home page</a>.</p>
+
+<% } else { %>
+
+<h3><%= message %></h3>
+<p><%= stack %></p>
+
+<% } %>
+
+<%- include('footer') -%>
