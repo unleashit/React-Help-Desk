@@ -11,7 +11,7 @@ var devtoolConfig = (NODE_ENV === 'production') ? false : '#source-map';
 console.log('node_env: ' + NODE_ENV);
 console.log('devtool config: ' + devtoolConfig);
 
-module.exports = {
+var configuration = {
     devtool: devtoolConfig,
 
     entry: {
@@ -62,6 +62,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'app', 'index.html'),
+            filename: 'index.html',
+            inject: 'body'
+        }),
+        new ExtractTextPlugin('./css/[name].min.css'),
         new webpack.LoaderOptionsPlugin({
             options: {
                 context: '/',
@@ -72,28 +78,30 @@ module.exports = {
                 ]
             }
         }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'app', 'index.html'),
-            filename: 'index.html',
-            inject: 'body'
-        }),
         new CopyWebpackPlugin([
             {context: './app/modules/reactHelpDesk/libs/sounds', from: '**/**', to: 'sounds'},
-        ]),
-        new ExtractTextPlugin('./css/[name].min.css'),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            comments: false,
-            //sourceMap: false
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(NODE_ENV)
-            }
-        })
+        ])
     ]
 };
 
+if (NODE_ENV === 'production') {
+
+    var uglify = new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        },
+        comments: false,
+        //sourceMap: false
+    });
+    var definePlugin = new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': JSON.stringify(NODE_ENV)
+        }
+    });
+
+    configuration.plugins.concat([uglify, definePlugin])
+
+}
+
+module.exports = configuration;
 

@@ -1,5 +1,5 @@
 # React Help Desk
-One to many live chat app with a React/Redux front end and Node.js back end. Uses socket.io and Sequelize to sync chats on a set interval to a database. The backend has a control panel that lets you manage multiple chats.
+One-to-many live chat app with a React/Redux front end and Node.js back end. Uses socket.io and Sequelize to sync chats on a set interval to a database. The backend has a control panel that lets you manage multiple chats.
 
 ![Help Desk](/../screenshots/react-help-desk.png?raw=true "Optional Title")
 
@@ -52,7 +52,7 @@ A second config file should be made in the root, called APPconfig.js. It's conte
 module.exports = {
 
     __API_URL__: 'http://localhost:3100/api', // replace with your site
-    __SOCKET_IO_URL__: 'http://localhost:3100/live-chat', // replace with your site
+    __SOCKET_IO_URL__: 'http://localhost:3100/help-desk', // replace with your site
     __SESSION_SECRET__: '{NotKeyBoardCat!}',
     __SESSION_KEY__: '{anythingYouLike}', // will be the name of the session cookie
 
