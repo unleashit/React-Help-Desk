@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var NODE_ENV = process.env.NODE_ENV || 'development';
@@ -58,7 +58,7 @@ module.exports = {
                 test: /\.(eot|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
                 loader: 'file-loader?name=fonts/[name].[ext]'
             },
-            // { test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/ }
+            { test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/ }
         ]
     },
     plugins: [
@@ -70,7 +70,6 @@ module.exports = {
                         browsers: ['> 2%', 'IE 10']
                     })
                 ]
-                // ...other configs that used to directly on `modules.exports`
             }
         }),
         new HtmlWebpackPlugin({
@@ -78,19 +77,22 @@ module.exports = {
             filename: 'index.html',
             inject: 'body'
         }),
+        new CopyWebpackPlugin([
+            {context: './app/modules/reactHelpDesk/libs/sounds', from: '**/**', to: 'sounds'},
+        ]),
         new ExtractTextPlugin('./css/[name].min.css'),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     },
-        //     comments: false,
-        //     //sourceMap: false
-        // }),
-        // new webpack.DefinePlugin({
-        //     'process.env': {
-        //         'NODE_ENV': JSON.stringify(NODE_ENV)
-        //     }
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            comments: false,
+            //sourceMap: false
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(NODE_ENV)
+            }
+        })
     ]
 };
 
