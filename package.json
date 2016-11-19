@@ -10,8 +10,28 @@
     "prod": "npm run build && NODE_ENV=production|| set NODE_ENV=production&& node server/app.js",
     "prod-no-build": "NODE_ENV=production|| set NODE_ENV=production&& node server/app.js"
   },
-  "author": "unleashit",
-  "license": "RESTRICTED",
+  "author": "Jason Gallagher",
+  "license": "MIT",
+  "keywords": [
+    "help desk",
+    "live chat",
+    "live agent",
+    "chat",
+    "react",
+    "redux",
+    "node.js",
+    "express",
+    "socket.io",
+    "realtime",
+    "websockets",
+    "mysql",
+    "postgres",
+    "mssql"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/browsersync/browser-sync.git"
+  },
   "dependencies": {
     "autoprefixer": "^6.5.3",
     "babel-polyfill": "^6.16.0",

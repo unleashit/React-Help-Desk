@@ -1,12 +1,12 @@
-# jasongallagher.org
-Personal site and portfolio of Jason Gallagher
+# React Help Desk
+One to many live chat app with a React/Redux front end and Node.js back end. Uses socket.io and Sequelize to sync chats on a set interval to a database. The backend has a control panel that lets you manage multiple chats.
 
-`Important Note: this code is NOT an open source. You have a right to view, or install a local copy for personal viewing only. You are not granted the right to use this in any other way, either for commercial or non-commercial reasons. You may not distribute this code. Please see the LICENSE file for more details.`
-
-Once you clone the project, you should first run `npm install` to download dependencies. Next run `npm run build` to run the build process and produce the public (dist) folder.
+Once you clone the project, you should first run `npm install` to download dependencies. Next create a database (see below). After that you can run `npm start` to launch a development server, or `npm run prod` to run the build process, produce the public (dist) folder and start the server. By default the server runs on port 3100, so you should go to `http://localhost:3100` to view the app.
 
 ### Database
-In order to actually run the project you need to create a database (see Sequelize docs for DB options) and two configuration files. For datatabase credentials, make add a file called DBconfig.json in the root. Here's the boiler plate which you can fill in with your details:
+In order to actually run the project you need to create a database and add a couple configuration files. The app is optimized for Mysql, but it should work with any Database that Sequelize supports (see their documentation). If you are using PostgreSql, you will need to change the _insert_chat_records query because sequelize doesn't support an `ON DUPLICATE KEY UPDATE` equivent for PG (you could change it to a raw SQL query if you like). 
+
+For datatabase credentials, make add a file called DBconfig.json in the root. Here's the boiler plate which you can fill in with your details:
 
 ```
 {
@@ -15,7 +15,7 @@ In order to actually run the project you need to create a database (see Sequeliz
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "{mysql|postgres|etc}",
+    "dialect": "{mysql|postgres|mssql|etc}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   },
@@ -24,7 +24,7 @@ In order to actually run the project you need to create a database (see Sequeliz
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "mysql|postgres|etc",
+    "dialect": "mysql|postgres|mssql|etc",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   },
@@ -32,13 +32,13 @@ In order to actually run the project you need to create a database (see Sequeliz
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "mysql|postgres|etc",
+    "dialect": "mysql|postgres|mssql|etc",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   }
 }
 ```
-### App Config
+### Other Config
 A second config file should be made in the root, called APPconfig.js. It's contents should be:
 
 ```
@@ -53,19 +53,16 @@ module.exports = {
     liveChat: {
         adminName: '{your name}',
         adminPerPage: 10, // how many archived chats to load per page in control panel
-        saveInterval: 1*60*1000, // once per 15 mins
-        purgeInterval: 2*60*1000, // min time to persist in ram (1 hr)
+        saveInterval: 10*60*1000, // once per 10 mins
+        purgeInterval: 20*60*1000, // min time to persist in ram (20 mins)
         sendSMS: false // send SMS on new user registrations
     },
     
-    // optional
-    mailoptions: {
-        from: '{your_from_email}',
-        to: '{your_to_email}',
-        subject: 'New contact'
-    },
+   
+    // If the chat is offline, the user can send an email
+    // If you don't have an smtp server, you can use GMAIL
+    // http://lifehacker.com/111166/how-to-use-gmail-as-your-smtp-server
     
-    // optional
     smtpConfig: {
         host: '{your_mail_host}',
         port: 465,
@@ -76,8 +73,17 @@ module.exports = {
         }
     }
     
-    // optional
+    mailoptions: {
+        from: '{your_from_email}',
+        to: '{your_to_email}',
+        subject: 'New contact'
+    },
+    
+    // optional - if sendSMS above is set to true, and you've set the SMTP config
+    // you can receive an SMS when a user begins chat
+    // very simple inplementation uses email to text
     // See https://20somethingfinance.com/how-to-send-text-messages-sms-via-email-for-free/
+    
     smsMailOptions: {
         from: '{your_from_email}',
         to: '{your_number@your_provider}', 
@@ -85,16 +91,12 @@ module.exports = {
     },
 };
 ```
-All keys should exist, but if optional can have any value. `mailoptions` and `smtpConfig` are for the contact form and are optional unless you want it to work... The contact form will both send an email and add a new record in the DB. I didn't bother to make a GUI for contacts, but may at some point.`smsMailOptions` can send a text notification when a user logs into chat.
 
-To automatically add the database schema to your empty DB, open up /server/app.js. In the bottom of the file, under the models.sequelize.sync call, TEMPORARILY change "force" to "true". The first time you run the project via `npm start` or `npm run prod`, if all goes well, it will add the tables. IMPORTANT: don't forget to change "force" back to "false" after you successfully add the schema or else next time your run it will wipe your DB clean!
+The first time you run the project via `npm start` or `npm run prod`, if all goes well, it will add the tables to your database and you'll be good to go.
 
-After this, you can now run the project in dev mode via `npm start` (a browser-sync will automatically launch a browser with webpack hot reload) or in production via `npm run prod`. The URL for the production build is http://localhost:3100 (instead of port 3000 for browser-sync).
+Note that because I started this on a non-react project, the control panel front-end is plain javascript. On some future rainy day, I plan on refactoring it so all clientside JS is in React.
 
 ### Administration and Login
 
-To acess the admin to manage chats and the portfolio, you need to add a user and then elevate its access level. To create a user, just go to /signup and create it. To elevate the user, go into the DB and change the access level to 3. Now you can login at /login with your user and access the control panel. One caveat that I plan on fixing on some rainy day: you must run `npm run build` or `npm run prod` in the terminal after you add projects to view their images. Webpack is needed for now to optimize and copy the uploaded images to the public folder.
-
-
-`Reminder: this code/theme/site is NOT open source. You have DO NOT have permission to use it for any other purpose except for your own personal viewing. Please see license file for further details.`
+To access the admin to manage chats, you need to first add a user and then elevate its access level. To create a user, just go to `/signup` and create it. To elevate the user, go the `Users` table in the DB and change the access level to 3. Now you can login at `/login` (or the link in the header) with your user and access the control panel.
 
