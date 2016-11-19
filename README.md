@@ -11,7 +11,7 @@ https://jasongallagher.org
 Once you clone the project, you should first run `npm install` to download dependencies, then `npm run build` to compile assets into the dist folder. Next create a database and add the config files (see below). After that you can run `npm start` to launch a development server, or `npm run prod` to run the build process and start the server in production mode. By default the server runs on port 3100, so you should go to `http://localhost:3100` to view the app.
 
 ### Database
-In order to actually run the project you need to create a database and add a couple configuration files. The app is optimized for Mysql, but it should work with any Database that Sequelize supports (see their [documentation](http://docs.sequelizejs.com/en/v3/)). If you are using PostgreSql, you will need to change the `_insert_chat_records` query because sequelize doesn't support an `ON DUPLICATE KEY UPDATE` equivent for PG (you could change it to a raw SQL query if you like). If you are using another db besides Mysql or PG, you'll need to add the appropriate Express session storage and configure it in `/server/services/sessions-config.js`. 
+In order to actually run the project you need to create a database and add a couple configuration files. The app is optimized for Mysql, but it should work with any Database that Sequelize supports (see their [documentation](http://docs.sequelizejs.com/en/v3/)). If you are using PostgreSql, you will need to change the `_insert_chat_records` query because sequelize doesn't support an `ON DUPLICATE KEY UPDATE` equivent for PG (you could change it to a raw SQL query if you like). If you are using another db besides Mysql or PG, you'll need to add the appropriate Express session storage and configure it in `/server/services/sessions-config.js`.
 
 For datatabase credentials, add a file called DBconfig.json in the root. Please see Sequelize [documentation](http://docs.sequelizejs.com/en/v3/), but here's a boiler plate which you can use. The curly braces are placeholders so be sure to remove and replace or you'll get syntax errors:
 
@@ -21,7 +21,8 @@ For datatabase credentials, add a file called DBconfig.json in the root. Please 
     "username": "{db_username}",
     "password": "{db_password}",
     "database": "{db_name}",
-    "host": "{host}",
+    "host": "{usually localhost}",
+    "port": "{usually 3306}",
     "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
@@ -30,7 +31,8 @@ For datatabase credentials, add a file called DBconfig.json in the root. Please 
     "username": "{db_username}",
     "password": "{db_password}",
     "database": "{db_name}",
-    "host": "{host}",
+    "host": "{usually localhost}",
+    "port": "{usually 3306}",
     "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
@@ -39,7 +41,8 @@ For datatabase credentials, add a file called DBconfig.json in the root. Please 
     "username": "{db_username}",
     "password": "{db_password}",
     "database": "{db_name}",
-    "host": "{host}",
+    "host": "{usually localhost}",
+    "port": "{usually 3306}",
     "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
@@ -64,12 +67,12 @@ module.exports = {
         purgeInterval: 20*60*1000, // min time to persist in ram (20 mins)
         sendSMS: false // send SMS on new user registrations
     },
-    
+
     // If the chat is offline, the user can send an email
     // optional, but needed if you want to receive the email
     // If you don't have an smtp server, you can use GMAIL
     // http://lifehacker.com/111166/how-to-use-gmail-as-your-smtp-server
-    
+
     smtpConfig: {
         host: '{your_mail_host}',
         port: 465,
@@ -79,21 +82,21 @@ module.exports = {
             pass: '{your_mail_password}'
         }
     },
-    
+
     mailoptions: {
         from: '{your_from_email}',
         to: '{your_to_email}',
         subject: 'New contact'
     },
-    
+
     // optional - if sendSMS above is set to true, and you've set the SMTP config
     // you can receive an SMS when a user begins chat
     // very simple inplementation uses email to text
     // See https://20somethingfinance.com/how-to-send-text-messages-sms-via-email-for-free/
-    
+
     smsMailOptions: {
         from: '{your_from_email}',
-        to: '{your_number@your_provider}', 
+        to: '{your_number@your_provider}',
         subject: 'New live chat user has registered'
     }
 };
@@ -106,4 +109,3 @@ Note that because I started this on a non-React project, the control panel front
 ### Administration and Login
 
 To access the admin to manage chats, you need to first add a user and then elevate its access level. To create a user, just go to `/signup` and create it. To elevate the user, go the `Users` table in the DB and change the access level to 3. Now you can login at `/login` (or the link in the header) with your user and access the control panel.
-

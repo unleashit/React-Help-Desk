@@ -5,7 +5,7 @@ var MySQLStore = require('express-mysql-session')(session);
 
 var options = {
     host: DBconfig.host,
-    port: 3306,
+    port: DBconfig.port,
     user: DBconfig.username,
     password: DBconfig.password,
     database: DBconfig.database,
@@ -45,4 +45,3 @@ module.exports = function (app) {
 
     return sessionStore;
 };
-

@@ -17,7 +17,7 @@ router.use((req, res, next) => {
     }
     // TODO: test status not sending to error view
     res.status(404);
-    res.render('error', { url: req.url, status: 404});
+    res.render('error', { url: req.url, status: 404, title: 'error'});
 });
 
 //routes

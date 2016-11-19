@@ -92,7 +92,7 @@ app.use(function(req, res, next){
     res.status(404);
 
     if (req.accepts('html')) {
-        res.render('error', { status: 404, url: req.url });
+        res.render('error', { status: 404, url: req.url, title: 'error' });
         return;
     }
 
@@ -112,7 +112,8 @@ if (app.get('env') === 'development') {
         res.render('error', {
             message: err.message,
             status: 500,
-            stack: err.stack
+            stack: err.stack,
+            title: 'error'
         });
     });
 }
