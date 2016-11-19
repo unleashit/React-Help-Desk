@@ -30,7 +30,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/browsersync/browser-sync.git"
+    "url": "git+https://github.com/unleashit/react_help_desk.git"
   },
   "dependencies": {
     "autoprefixer": "^6.5.3",

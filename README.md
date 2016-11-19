@@ -1,6 +1,8 @@
 # React Help Desk
 One to many live chat app with a React/Redux front end and Node.js back end. Uses socket.io and Sequelize to sync chats on a set interval to a database. The backend has a control panel that lets you manage multiple chats.
 
+![Help Desk](/../screenshots/react-help-desk.png?raw=true "Optional Title")
+
 ### Demo
 https://jasongallagher.org
 
