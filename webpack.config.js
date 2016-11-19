@@ -1,8 +1,8 @@
 var webpack = require('webpack');
-var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 var NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -27,32 +27,29 @@ var configuration = {
 
     module: {
         loaders: [
-            { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' }) },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader?sourceMap'
+                })
+            },
             {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract({
-                fallbackLoader: 'style-loader',
-                loader: 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
-                includePaths: [path.resolve(__dirname, './app/scss')]
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
+                    includePaths: [path.resolve(__dirname, './app/scss')]
                 })
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    plugins: [
-                        ['transform-runtime']
-                    ],
-                    presets: ['es2015', 'stage-2']
-                }
+                loader: 'babel-loader'
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [
-                    'file-loader?hash=sha512&digest=hex&name=images/[name]-[hash].[ext]',
-                    //'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-                ]
+                loaders: ['file-loader?hash=sha512&digest=hex&name=images/[name]-[hash].[ext]']
             },
             {
                 test: /\.(eot|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
@@ -90,8 +87,7 @@ if (NODE_ENV === 'production') {
         compress: {
             warnings: false
         },
-        comments: false,
-        //sourceMap: false
+        comments: false
     });
     var definePlugin = new webpack.DefinePlugin({
         'process.env': {

@@ -8,12 +8,12 @@ https://jasongallagher.org
 
 ### Getting Started
 
-Once you clone the project, you should first run `npm install` to download dependencies, then `npm run build` to compile assets into the dist folder. Next create a database (see below). After that you can run `npm start` to launch a development server, or `npm run prod` to run the build process and start the server in production mode. By default the server runs on port 3100, so you should go to `http://localhost:3100` to view the app.
+Once you clone the project, you should first run `npm install` to download dependencies, then `npm run build` to compile assets into the dist folder. Next create a database and add the config files (see below). After that you can run `npm start` to launch a development server, or `npm run prod` to run the build process and start the server in production mode. By default the server runs on port 3100, so you should go to `http://localhost:3100` to view the app.
 
 ### Database
-In order to actually run the project you need to create a database and add a couple configuration files. The app is optimized for Mysql, but it should work with any Database that Sequelize supports (see their documentation). If you are using PostgreSql, you will need to change the _insert_chat_records query because sequelize doesn't support an `ON DUPLICATE KEY UPDATE` equivent for PG (you could change it to a raw SQL query if you like). 
+In order to actually run the project you need to create a database and add a couple configuration files. The app is optimized for Mysql, but it should work with any Database that Sequelize supports (see their [documentation](http://docs.sequelizejs.com/en/v3/)). If you are using PostgreSql, you will need to change the `_insert_chat_records` query because sequelize doesn't support an `ON DUPLICATE KEY UPDATE` equivent for PG (you could change it to a raw SQL query if you like). If you are using another db besides Mysql or PG, you'll need to add the appropriate Express session storage and configure it in `/server/services/sessions-config.js`. 
 
-For datatabase credentials, make add a file called DBconfig.json in the root. Here's the boiler plate which you can fill in with your details. THe curly braces are placeholders so be sure to remove and replace or you'll get syntax errors:
+For datatabase credentials, add a file called DBconfig.json in the root. Please see Sequelize [documentation](http://docs.sequelizejs.com/en/v3/), but here's a boiler plate which you can use. The curly braces are placeholders so be sure to remove and replace or you'll get syntax errors:
 
 ```
 {
@@ -22,24 +22,25 @@ For datatabase credentials, make add a file called DBconfig.json in the root. He
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "{mysql|postgres|mssql|etc}",
+    "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   },
-  "test": {
+  "staging": {
     "username": "{db_username}",
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "mysql|postgres|mssql|etc",
+    "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   },
+  "production": {
     "username": "{db_username}",
     "password": "{db_password}",
     "database": "{db_name}",
     "host": "{host}",
-    "dialect": "mysql|postgres|mssql|etc",
+    "dialect": "{mysql|mariadb|sqlite|postgres|mssql}",
     "charset": "utf8",
     "collate": "utf8_unicode_ci"
   }
