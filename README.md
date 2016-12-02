@@ -3,6 +3,19 @@ One-to-many live chat app with a React/Redux front end and Node.js back end. Use
 
 ![Help Desk](/../screenshots/react-help-desk.png?raw=true "Optional Title")
 
+### Features
+
+* Realtime help desk style chat for one admin to one or more users
+* React/Redux client, Node/Express server
+* Control panel to administer multiple chats, archive and delete
+* Indicates to the user if admin is online, and if not provides a contact form instead of chat
+* Typing indicators and notification sounds for both user and admin 
+* Option to send an SMS to the admin on new chat registration
+* Batched database persistence on a set interval for better I/O performance
+* Socket.io and Passport authentication and sessions for the admin
+* Defaults to Mysql, but based on Sequelize so can easily be adapted to other SQL databases (NoSQL wouldn't be too much work if you refactor the DB layer)
+* Modular (especially the client) and easy to integrate with an existing site
+
 ### Demo
 https://jasongallagher.org
 
