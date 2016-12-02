@@ -1,41 +1,33 @@
 @import '../../reactHelpDesk/scss/variables';
 
-// navbar
-#navbar-toggle-cbox:checked ~ .collapse {
-  display: block;
-  .navbar-nav .nav-item + .nav-item,
-  .navbar-nav .nav-item {
-    margin-left: 0;
-    float: none;
+// navbar (and padding underneath)
+.control-panel {
+  #navbar-toggle-cbox:checked ~ .collapse {
+    display: block;
+    .navbar-nav .nav-item + .nav-item,
+    .navbar-nav .nav-item {
+      margin-left: 0;
+      float: none;
+    }
   }
-}
 
-#navbar-toggle-cbox {
-  display: none;
-}
-
-.navbar-toggler,
-.test {
-  background-color: #454646;
-}
-@media (min-width: 544px) {
-  .navbar {
-    border-radius: 0;
+  #navbar-toggle-cbox {
+    display: none;
   }
-}
 
-// override client css
-//.form-control:focus {
-//  color: #ccc;
-//  background-color: #292929;
-//  border: 0;
-//  outline: none;
-//}
+  .navbar-toggler,
+  .test {
+    background-color: #454646;
+  }
+  @media (min-width: 544px) {
+    .navbar {
+      border-radius: 0;
+    }
+  }
 
-// main css begins
-
-.main-content {
-  padding-top: 45px;
+  .main-content {
+    padding-top: 45px;
+  }
 }
 
 // live chat manager

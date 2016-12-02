@@ -37,19 +37,10 @@
   opacity: 1;
   &.chat-online {
     background-color: $light-green;
-    animation: blink-animation 2.5s infinite;
+    animation: live-chat-blink-animation 2.5s infinite;
   }
   &.chat-offline {
     background-color: $chat-offline;
-  }
-}
-
-@keyframes blink-animation {
-  10% {
-    opacity: 0.4;
-  }
-  13% {
-    opacity: 1;
   }
 }
 
@@ -109,7 +100,7 @@
     font-size: 0.9rem;
     padding-top: 9px;
     .cloud {
-      animation: blink-animation 2.5s infinite;
+      animation: live-chat-blink-animation 2.5s infinite;
       fill: $chat-online;
     }
   }
@@ -183,46 +174,7 @@
   }
 }
 
-.button {
-  display: inline-block;
-  padding: 12px 26px;
-  color: #fff;
-  background-color: #828282;
-  border: 0;
-  font-family: Oswald, sans-serif;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  outline: none !important;
-  &.button-green {
-    background-color: $light-green;
-  }
-  &.button-charcoal {
-    background-color: #333;
-  }
-  &.button-smaller {
-    padding: 10px 18px;
-    font-size: 0.9rem;
-  }
-  &.button-xs {
-    padding: 6px 8px;
-    font-size: 0.7rem;
-    border-radius: 20px;
-    border: 2px solid #b2b2b2;
-    color: #b2b2b2;
-    background: 0;
-  }
-  &.button-block {
-    display: block;
-    width: 100%;
-  }
-  &:link,
-  &:visited,
-  &:active,
-  &:target {
-    color: #fff;
-    text-decoration: none;
-  }
-}
+
 
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
   .content-wrapper {

@@ -1,68 +1,35 @@
+// Bootstrap 4 is required by Help Desk unless you want to do some retheming
+// To cut back on bloat, you can copy the scss files from NPM into your project and comment out unneeded modules
+// or use CSS Purify (recommended) if it works in your situation
 @import "~bootstrap/scss/bootstrap";
+@import "modules/reactHelpDesk/scss/live-chat";
 
-// a few global styles to make the overall template work
-// not needed for the help desk component
-
+// a few global styles to make the overall template look good
+// not needed for the help desk component unless you want to keep the
 html {
-  height: 100%;
   font-size: 17px;
 }
 
 body {
-  height: 100%;
-  min-height: 100%;
   font-family: "Sanchez", sans-serif;
 }
 
-// this allows clicking on the viewport to the left
-// of the chat box to close the chat
+@import "modules/home/scss/home";
+
+// needed if you want to keep the push-slide style of the chat box
+.content-wrapper {
+  overflow: hidden;
+  transition: all cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s;
+  &.live-chat-open {
+    transform: translate(-$chat-width, 0);
+  }
+}
+
+// allows clicking on the viewport to the left of the chat box to close the chat
+html,
+body,
 #root,
 .page-wrapper,
 .content-wrapper {
   height: 100%;
 }
-
-// global utility styles
-
-//.clearfix:after {
-//  content: " ";
-//  display: table;
-//  clear: both;
-//}
-//
-//.visually-hidden {
-//  border: 0;
-//  clip: rect(0 0 0 0);
-//  height: 1px;
-//  margin: -1px;
-//  overflow: hidden;
-//  padding: 0;
-//  position: absolute;
-//  width: 1px;
-//  &-focusable:active,
-//  &-focusable:focus {
-//    clip: auto;
-//    height: auto;
-//    margin: 0;
-//    overflow: visible;
-//    position: static;
-//    width: auto;
-//  }
-//}
-
-
-
-//.center-container {
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//  position: absolute;
-//  top: 0;
-//  left: 0;
-//  right: 0;
-//  bottom: 0;
-//}
-
-@import "modules/home/scss/home";
-@import "modules/reactHelpDesk/scss/live-chat";
-
