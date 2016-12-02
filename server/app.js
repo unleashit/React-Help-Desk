@@ -147,7 +147,6 @@ app.set('port', process.env.PORT || 3100);
 
 models.sequelize.sync({
     force: false,
-    // logging: function(str) {console.log(str);}
     })
     .then(function () {
         var server = http.listen(app.get('port'), function() {

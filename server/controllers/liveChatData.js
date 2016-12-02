@@ -2,14 +2,23 @@ var models = require('../models/index.js');
 var sequelize = require('sequelize');
 var path = require('path');
 var config = require(path.join(__dirname, '..', '..', 'APPconfig'));
+var DBconfig = require('../../DBconfig.json')[process.env.NODE_ENV || 'development'];
 
 function _insertChatRecords(users) {
-    return models.LiveChat.bulkCreate(users,
-        {
-            updateOnDuplicate: [
-                'name', 'email', 'connected', 'messages', 'date', 'updatedAt'
-            ]
-        });
+
+    if (DBconfig.dialect !== 'mysql') {
+        const err = `Chat data cannot be saved to database. ${DBconfig.dialect} with Sequelize doesn\'t support batch upsert.
+            Change _insertChatRecords() to an upsert loop or raw SQL query`;
+        throw new Error(err);
+
+    } else {
+        return models.LiveChat.bulkCreate(users,
+            {
+                updateOnDuplicate: [
+                    'name', 'email', 'connected', 'messages', 'date', 'updatedAt'
+                ]
+            });
+    }
 }
 
 function _formatUsers(users) {

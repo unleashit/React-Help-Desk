@@ -1,7 +1,6 @@
 var session = require('express-session');
 var config = require('../../APPconfig');
 var DBconfig = require('../../DBconfig.json')[process.env.NODE_ENV || 'development'];
-var MySQLStore = require('express-mysql-session')(session);
 
 var options = {
     host: DBconfig.host,
@@ -19,6 +18,7 @@ module.exports = function (app) {
 
     if (DBconfig.dialect === 'mysql') {
 
+        var MySQLStore = require('express-mysql-session')(session);
         sessionStore = new MySQLStore(options);
 
     } else if (DBconfig.dialect === 'postgres') {
@@ -30,8 +30,14 @@ module.exports = function (app) {
             conString: 'postgresql://' + options.user + ':' +
                 options.password + '@' + options.host +
                 (options.port ? ':' + options.port : '') + '/react_help_desk',
-                tableName: 'sessions' // Use another table-name than the default "session" one
+                tableName: 'session' // Optionally use another table-name than the default "session"
         });
+
+    } else {
+
+        throw new Error(`This script only supports mysql or postgres sessions out of the box.
+            If you want to use another DB, please add the appropriate
+            session connector and modify sessions-config.js`);
     }
 
     app.use(session({
