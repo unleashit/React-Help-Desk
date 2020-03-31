@@ -92,7 +92,7 @@
     "cssnano": "3.8.0",
     "debug": "2.3.2",
     "del": "2.2.2",
-    "eslint": "3.10.2",
+    "eslint": "4.18.2",
     "eslint-config-airbnb": "13.0.0",
     "eslint-loader": "1.6.1",
     "eslint-plugin-import": "2.2.0",
