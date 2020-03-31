@@ -45,7 +45,7 @@
     "bootstrap": "4.0.0-alpha.5",
     "compression": "1.6.2",
     "connect-flash": "0.1.1",
-    "connect-pg-simple": "3.1.2",
+    "connect-pg-simple": "6.0.1",
     "cookie-parser": "1.4.3",
     "crypto": "0.0.3",
     "ejs": "2.5.2",
