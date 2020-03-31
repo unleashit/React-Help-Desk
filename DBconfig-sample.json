@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "rhd",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres",
+    "charset": "utf8",
+    "collate": "utf8_unicode_ci"
+  },
+  "staging": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "rhd_staging",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres",
+    "charset": "utf8",
+    "collate": "utf8_unicode_ci"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "rhd_prod",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres",
+    "charset": "utf8",
+    "collate": "utf8_unicode_ci"
+  }
+}
