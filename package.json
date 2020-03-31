@@ -90,7 +90,7 @@
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.25.0",
     "cssnano": "3.8.0",
-    "debug": "2.3.2",
+    "debug": "2.6.9",
     "del": "2.2.2",
     "eslint": "3.10.2",
     "eslint-config-airbnb": "13.0.0",
