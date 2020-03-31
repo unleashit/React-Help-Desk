@@ -29,7 +29,7 @@ module.exports = function (app) {
             pg: pg,  // Use global pg-module
             conString: 'postgresql://' + options.user + ':' +
                 options.password + '@' + options.host +
-                (options.port ? ':' + options.port : '') + '/react_help_desk',
+                (options.port ? ':' + options.port : '') + '/' + options.database,
                 tableName: 'session' // Optionally use another table-name than the default "session"
         });
 
@@ -49,5 +49,5 @@ module.exports = function (app) {
         cookie: { maxAge: 5 * 24 * 60 * 60 * 1000 } // 5 days
     }));
 
-    return sessionStore;
+  return sessionStore;
 };
